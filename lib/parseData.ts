@@ -39,8 +39,9 @@ function buildColumnInfo(headers: string[], rows: any[][]): ColumnInfo[] {
 }
 
 export async function parseCSV(file: File): Promise<ParsedData> {
+  const text = await file.text();
   return new Promise((resolve, reject) => {
-    Papa.parse(file, {
+    Papa.parse(text, {
       complete: (results) => {
         const data = results.data as any[][];
         if (data.length === 0) {
